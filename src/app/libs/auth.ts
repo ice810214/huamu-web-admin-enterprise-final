@@ -26,3 +26,11 @@ export const logout = () => {
 export const onUserStateChange = (callback: (user: User | null) => void) => {
   return onAuthStateChanged(auth, callback);
 };
+
+// src/libs/auth.ts
+
+export function isAuthenticated(): boolean {
+    // 模擬驗證，之後可串 Firebase Auth
+    return true;
+  }
+  
