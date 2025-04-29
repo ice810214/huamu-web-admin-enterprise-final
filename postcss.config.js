@@ -1,6 +1,6 @@
-// ✅ 完整正解，保證可編譯
 module.exports = {
     plugins: {
+      'postcss-nesting': {},        // ✅ Nesting 功能（不是 tailwindcss/nesting）
       tailwindcss: {},
       autoprefixer: {},
     },
