@@ -1,18 +1,22 @@
+// app/page.tsx
 "use client";
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { onUserStateChange } from "@/libs/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/libs/firebase";
 
 export default function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onUserStateChange((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        // 登入成功，導向 Dashboard
         router.push("/dashboard");
       } else {
-        router.push("/auth");
+        // 尚未登入，導向 Auth 登入頁
+        router.push("/auth/login");
       }
     });
 
@@ -20,9 +24,9 @@ export default function HomePage() {
   }, [router]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center p-4">
-      <h1 className="text-2xl font-bold text-center">鏵莯空間美學設計報價系統</h1>
-      <p className="text-gray-600 mt-2">頁面導向中，請稍候...</p>
+    <main className="flex min-h-screen flex-col items-center justify-center p-6">
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">Huamu Web Admin</h1>
+      <p className="text-gray-500">頁面載入中，請稍候...</p>
     </main>
   );
 }
